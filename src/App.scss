@@ -1,0 +1,18 @@
+@import "./defaults.scss";
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 15px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.add-new-contact {
+    @extend .main-btn;
+}

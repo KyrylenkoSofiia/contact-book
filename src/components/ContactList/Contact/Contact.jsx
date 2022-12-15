@@ -1,5 +1,5 @@
 import React from "react";
-import "./Contact.css";
+import "./Contact.scss";
 
 class Contact extends React.Component {
 
@@ -7,10 +7,10 @@ class Contact extends React.Component {
         const {item, removeContact} = this.props;
         return(
             <>
-            <div>
+            <div className="contact">
                 <p>{item.firstName} {item.lastName}</p>
                 <a href={`tel:${item.number}`}>{item.number}</a>
-                <button onClick={() => {removeContact(item.id)}}>remove</button>
+                <button className="contact__btn" onClick={() => {removeContact(item.id)}}>Remove</button>
             </div>
             </>
         )

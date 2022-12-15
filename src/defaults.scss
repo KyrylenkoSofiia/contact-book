@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* vars */
+
+$border: #a2a2a2;
+$text: #000;
+$add: #146804;
+$remove: #ec1e3d;
+$white: #fff;
+$link: #ff0076;
+
+
+/* default styles */
+
+html {
+    font-family: 'Roboto', sans-serif;
+    color: $text;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 5px 15px;
+    color: $white;
+    box-shadow: none;
+    border-radius: 5px;
+    transition: 0.4s ease-in-out;
+    &:hover, &:focus, &:active {
+        background: $white;
+        color: $text;
+    }
+}
+
+.main-btn {
+    @extend .btn;
+    background: $add;
+    border: 2px solid $add;
+}
+
+.remove-btn {
+    @extend .btn;
+    background: $remove;
+    border: 2px solid $remove;
+}

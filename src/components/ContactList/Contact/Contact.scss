@@ -1,0 +1,30 @@
+@import "../../../defaults.scss";
+
+.contact {
+    @extend .flex;
+    border: 2px solid $border;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    &:last-of-type {
+        margin-bottom: 20px;
+    }
+
+    &__btn {
+        @extend .remove-btn;
+    }
+
+    p, a {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    a {
+        display: inline-block;
+        color: $link;
+        text-decoration: none;
+        &:hover, &:focus, &:active {
+            text-decoration: underline;
+        }
+    }
+}

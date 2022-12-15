@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import ContactList from './components/ContactList/ContactList';
 import Form from './components/Form/Form';
 
@@ -43,7 +43,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="container">
       <h1>Contact book</h1>  
       <ContactList contacts={this.state.contacts} removeContact={this.removeContact} />
       {
@@ -51,9 +51,9 @@ class App extends React.Component {
         ? 
         <Form toggleForm={this.toggleForm} addNewContact={this.addNewContact} />
         :
-        <button onClick={this.toggleForm}>Add New Contact</button>
+        <button className="add-new-contact" onClick={this.toggleForm}>Add New Contact</button>
       }
-      </>
+      </div>
     )
   }
 }

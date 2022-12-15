@@ -1,0 +1,35 @@
+@import "../../defaults.scss";
+
+.form {
+    border: 2px solid $border;
+    padding: 10px;
+    border-radius: 5px;
+
+    input {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding: 7px;
+        border: 1px solid $border;
+        &:hover, &:focus {
+            outline: $border;
+        }
+    }
+
+    &__submit,
+    &__reset {
+        margin: 0 5px;
+    }
+
+    &__submit {
+        @extend .main-btn;
+        &.disable {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
+    &__reset {
+        @extend .remove-btn;
+    }
+}

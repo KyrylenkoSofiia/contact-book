@@ -1,5 +1,5 @@
 import React from "react";
-import "./Form.css";
+import "./Form.scss";
 
 class Form extends React.Component {
     state = {
@@ -36,7 +36,7 @@ class Form extends React.Component {
 
       return(
           <>
-          <form classList="form" onSubmit={this.sendingForm}>
+          <form className="form" onSubmit={this.sendingForm}>
               <input 
                 type="text"
                 name="firstName"
@@ -59,10 +59,11 @@ class Form extends React.Component {
                 placeholder="Enter phone number"
                 onChange={this.handleInputChange} />
               <button
-                className="submit"
-                type='submit'
-                disabled={!(this.state.firstName && this.state.lastName && this.state.number)}>submit</button>
-              <button className="reset" type="reset" onClick={() => {toggleForm()}}>reset</button>
+                className={`form__submit${(!(this.state.firstName && this.state.lastName && this.state.number) ? ' disable' : '')}`}
+                type='submit'>
+                  Submit
+              </button>
+              <button className="form__reset" type="reset" onClick={() => {toggleForm()}}>Reset</button>
           </form>
           </>
       )
