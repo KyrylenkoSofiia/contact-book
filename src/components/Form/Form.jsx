@@ -1,73 +1,63 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Form.scss";
 
-class Form extends React.Component {
-    state = {
-        firstName: '',
-        lastName: '',
-        number: ''
+function Form({toggleForm, addNewContact}) {
+    const [contact, setContact] = useState({firstName: '', lastName: '', number: ''});
+
+    const handleInputChange = (e) => {
+        const {value, name} = e.target
+        setContact({
+            ...contact,
+            [name]: value
+        })
     }
 
-    handleInputChange = (e) => {
-        const { value, name } = e.target;
-        this.setState({
-          ...this.state,
-          [name]: value,
-        });
-    };
-
-    sendingForm = (e) => {
+    const sendingForm = (e) => {
         e.preventDefault();
-        this.props.addNewContact(this.state);
-        this.resetForm();
-        this.props.toggleForm();
+        addNewContact(contact);
+        resetForm();
+        toggleForm();
     }
 
-    resetForm = () => {
-        this.setState({
-            firstName: '',
-            lastName: '',
-            number: ''
-        });
-      };
-
-    render() {
-      const {toggleForm} = this.props;
-
-      return(
-          <>
-          <form className="form" onSubmit={this.sendingForm}>
-              <input 
-                type="text"
-                name="firstName"
-                required
-                value={this.state.firstName}
-                placeholder="Enter name"
-                onChange={this.handleInputChange} />
-              <input
-                type="text"
-                name="lastName"
-                required
-                value={this.state.lastName}
-                placeholder="Enter surname"
-                onChange={this.handleInputChange} />
-              <input
-                type="number"
-                name="number"
-                required
-                value={this.state.number}
-                placeholder="Enter phone number"
-                onChange={this.handleInputChange} />
-              <button
-                className={`form__submit${(!(this.state.firstName && this.state.lastName && this.state.number) ? ' disable' : '')}`}
-                type='submit'>
-                  Submit
-              </button>
-              <button className="form__reset" type="reset" onClick={() => {toggleForm()}}>Reset</button>
-          </form>
-          </>
-      )
+    const resetForm = (e) => {
+        setContact({
+            ...contact
+        })
     }
+
+    return(
+        <>
+            <form className="form" onSubmit={sendingForm}>
+                <input
+                    type="text"
+                    name="firstName"
+                    required
+                    value={contact.firstName}
+                    placeholder="Enter name"
+                    onChange={handleInputChange} />
+                <input
+                    type="text"
+                    name="lastName"
+                    required
+                    value={contact.lastName}
+                    placeholder="Enter surname"
+                    onChange={handleInputChange} />
+                <input
+                    type="number"
+                    name="number"
+                    required
+                    value={contact.number}
+                    placeholder="Enter phone number"
+                    onChange={handleInputChange} />
+                <button
+                    className={`form__submit${(!(contact.firstName && contact.lastName && contact.number) ? ' disable' : '')}`}
+                    type='submit'>
+                    Submit
+                </button>
+                <button className="form__reset" type="reset" onClick={() => {toggleForm()}}>Reset</button>
+            </form>
+        </>
+    )
 }
 
 export default Form;

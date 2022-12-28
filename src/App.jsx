@@ -1,61 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.scss';
 import ContactList from './components/ContactList/ContactList';
 import Form from './components/Form/Form';
 
-const contacts = [
-  {
-    id: 0,
-    firstName: 'John',
-    lastName: 'Dow',
-    number: '+445791111111'
-  },
-  {
-    id: 1,
-    firstName: 'Richard',
-    lastName: 'Gir',
-    number: '+445792222222'
-  }
-]
+function App(props) {
 
-class App extends React.Component {
-    state = {
-      contacts: contacts,
-      isAdding: false,
-    };
-
-  removeContact = (id) => {
-    this.setState({ contacts: this.state.contacts.filter((item) => id !== item.id) });
-  };
-
-  addNewContact =(item) => {
-    this.setState({
-      contacts: [
-        ...this.state.contacts,
-        { id: Date.now(), ...item },
-      ],
-    });
-  }
-
-  toggleForm = () => {
-    this.setState({isAdding: !this.state.isAdding});
-  }
-
-  render() {
-    return (
-      <div className="container">
-      <h1>Contact book</h1>  
-      <ContactList contacts={this.state.contacts} removeContact={this.removeContact} />
+  const [contacts, setContacts] = useState( [
       {
-        this.state.isAdding 
-        ? 
-        <Form toggleForm={this.toggleForm} addNewContact={this.addNewContact} />
-        :
-        <button className="add-new-contact" onClick={this.toggleForm}>Add New Contact</button>
+          id: 0,
+          firstName: 'John',
+          lastName: 'Dow',
+          number: '+445791111111'
+      },
+      {
+          id: 1,
+          firstName: 'Richard',
+          lastName: 'Gir',
+          number: '+445792222222'
       }
-      </div>
-    )
+  ]);
+  const [isAdding, setAdding] = useState(false);
+
+   const removeContact = (id) => {
+     const newContacts = contacts.filter(item => item.id !== id);
+     setContacts(newContacts);
+   }
+
+  const addNewContact = (item) => {
+    item = {...item, id: Date.now()};
+    setContacts([...contacts, item]);
   }
+
+   const toggleForm = () => {
+    setAdding(!isAdding);
+   }
+
+
+  return(
+      <div className="container">
+        <h1>Contact book</h1>
+        <ContactList contacts={contacts} removeContact={removeContact} />
+        {
+         isAdding
+         ?
+         <Form toggleForm={toggleForm} addNewContact={addNewContact} />
+         :
+         <button className="add-new-contact" onClick={toggleForm}>Add New Contact</button>
+       }
+       </div>
+  )
 }
 
 export default App;
